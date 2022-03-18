@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.sqli.authentification.dao.UserDao;
 import org.sqli.authentification.entitie.User;
 import org.sqli.authentification.service.UserService;
 
@@ -14,6 +15,17 @@ import org.sqli.authentification.service.UserService;
 public class UserController {
 	@Autowired 
 	UserService userService;
+	@Autowired 
+	UserDao userdao;
+	
+	
+	
+	@PostMapping("/auth")
+	public User createUser(@RequestBody User u )
+	{
+		 return userdao.save(u);
+	}
+	
 	
 	
 	@PostMapping("/auth")
