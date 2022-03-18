@@ -30,11 +30,20 @@ public class UserController {
 							+ "  }"));
 		}
 		else {
+			if(u.getLoginAttempts()>=3) {
+				
+				return ResponseEntity
+						.badRequest()
+						.body(new String("{ \r\n"
+								+ "  \"error\": \"You have reached 3 failed authentication attempts, your account will be disabled\"\r\n"
+								+ "  }"));
+			}
+			else {
 		return ResponseEntity.accepted()
 				.body( new String("{"+
 					 "\"id\" :"+ u.getId()+","+
 					  "\"login\" :" + u.getLogin()+","+
-					  "\"group\" :" +u.getGroup().getName()+"}"));}
+					  "\"group\" :" +u.getGroup().getName()+"}"));}}
 	}
 	else {return ResponseEntity
 			.badRequest()
